@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // Image.asset("assets/images/dfruto-logo2.png", height: 60.0, filterQuality: FilterQuality.medium),
-            // Image.network('https://dfruto.ga/dfruto-logo2.png',height: 60.0, filterQuality: FilterQuality.medium),
+            Image.network('https://dfruto.ga/dfruto-logo2.png',height: 60.0, filterQuality: FilterQuality.medium),
             // Text('Classify transaction',
             //     style: TextStyle(
             //         color: Colors.white,
@@ -136,7 +136,7 @@ class HomePage extends StatelessWidget {
             // Navigator.pushNamed(context, '/proveedor_page');
             break;
           case 3:
-            // Navigator.pushNamed(context, AdminProductosScreen.routeName);
+            Navigator.pushNamed(context, '/producto_page');
             break;
           default:
           // Navigator.pushNamed(context, AdminStockScreen.routeName);
