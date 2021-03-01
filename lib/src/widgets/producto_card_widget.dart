@@ -45,15 +45,18 @@ class ProductoCardWidget extends StatelessWidget {
                     // tag: Text("hero1"),
                     tag: producto.id.toString(),
                     child: (producto.fotoUrl == null)
-                        ? Image(image: AssetImage('assets/images/no-image.jpg'))
-                        : FadeInImage(
-                            image: NetworkImage(producto.fotoUrl),
-                            placeholder:
-                                AssetImage('assets/images/loading.gif'),
-                            height: 100.0,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                        ? Image(image: AssetImage('assets/images/no-image1.gif'))
+                        : ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: FadeInImage(
+                              image: NetworkImage(producto.fotoUrl),
+                              placeholder:
+                                  AssetImage('assets/images/loading-sandia2.gif'),
+                              height: 100.0,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                        ),
                   ),
                 ),
               ),

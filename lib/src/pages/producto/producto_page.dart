@@ -29,7 +29,8 @@ class _ProductoPageState extends State<ProductoPage> {
       ),
       body: FutureBuilder(
         future: productoProvider.cargarProductos(),
-        builder: (BuildContext context, AsyncSnapshot<List<Producto>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Producto>> snapshot) {
           if (snapshot.hasData) {
             final productos = snapshot.data;
             return GridView.builder(
@@ -47,7 +48,24 @@ class _ProductoPageState extends State<ProductoPage> {
                   return ProductoCardWidget(producto: producto);
                 });
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                    height: 600,
+                    width: double.infinity,
+                    child: Center(child: Image.asset('assets/images/loading-sandia2.gif'))
+                ),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Container(
+                      height: 150,
+                      width: double.infinity,
+                      child: Center(child: CircularProgressIndicator())
+                  ),
+                ),
+              ],
+            );
           }
         },
       ),
