@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:dfruto/src/models/producto_model.dart';
 import 'package:http/http.dart' as http;
 
-
 class ProductoProvider {
   // final String _url = 'http://192.168.31.20:3000/productos';
   final String _url = 'https://dfruto-4c8b0.firebaseio.com/productos.json';
@@ -17,10 +16,28 @@ class ProductoProvider {
     return data.productos;
   }
 
-    Future<List<Producto>> cargarProductos() async {
+  Future<List<Producto>> cargarProductos() async {
     final resp = await http.get(_url);
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);
+    final List<Producto> productos = new List();
+
+    if (decodedData == null) return [];
+    decodedData.forEach((id, prod) {
+      final prodTemp = Producto.fromJson(prod);
+      prodTemp.id = id;
+
+      productos.add(prodTemp);
+    });
+    return productos;
+  }
+
+  Future<List<Producto>> buscarProductos(String query) async {
+    String url ='https://dfruto-4c8b0.firebaseio.com/productos.json?orderBy="nombre"&limitToFirst=9&startAt="${query}"';
+    final resp = await http.get(url);
+
+    final Map<String, dynamic> decodedData = json.decode(resp.body);
+    print(decodedData);
     final List<Producto> productos = new List();
 
     if (decodedData == null) return [];
