@@ -3,6 +3,7 @@ import 'package:dfruto/src/pages/cliente/cliente_form.dart';
 import 'package:dfruto/src/pages/cliente/cliente_pages.dart';
 import 'package:dfruto/src/pages/home_page.dart';
 import 'package:dfruto/src/pages/pedido/pedido_page.dart';
+import 'package:dfruto/src/pages/producto/producto_detail_page.dart';
 import 'package:dfruto/src/pages/producto/producto_page.dart';
 import 'package:dfruto/src/pages/provedor/proveedor_form.dart';
 import 'package:dfruto/src/pages/provedor/proveedor_page.dart';
@@ -43,10 +44,10 @@ class MyApp extends StatelessWidget {
           '/proveedor_page': (context) => ProveedorPage(),
           '/proveedor_form': (context) => FormProveedorPage(),
 
-
-          // '/proveedor_form': (context) => FormProveedorPage(),
           '/producto_page': (context) => ProductoPage(),
           '/pedido_page': (context) => PedidoPage(),
+
+          '/producto_detail_page': (context) => ProductoDetailPage(),
         },
       ),
     );

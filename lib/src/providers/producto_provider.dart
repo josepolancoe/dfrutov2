@@ -33,7 +33,8 @@ class ProductoProvider {
   }
 
   Future<List<Producto>> buscarProductos(String query) async {
-    String url ='https://dfruto-4c8b0.firebaseio.com/productos.json?orderBy="nombre"&limitToFirst=9&startAt="${query}"';
+    // String url ='https://dfruto-4c8b0.firebaseio.com/productos.json?orderBy="nombre"&limitToFirst=9&startAt="${query}"';
+    String url ='https://dfruto-4c8b0.firebaseio.com/productos.json?orderBy="nombre"&startAt="${query}"';
     final resp = await http.get(url);
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);

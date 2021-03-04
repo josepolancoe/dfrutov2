@@ -1,8 +1,11 @@
+import 'package:dfruto/constantes.dart';
 import 'package:dfruto/src/models/producto_model.dart';
+import 'package:dfruto/src/providers/carrito_provider.dart';
 import 'package:dfruto/src/providers/producto_provider.dart';
 import 'package:dfruto/src/search/search_delegate.dart';
 import 'package:dfruto/src/widgets/producto_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductoPage extends StatefulWidget {
   @override
@@ -14,22 +17,12 @@ class _ProductoPageState extends State<ProductoPage> {
 
   @override
   Widget build(BuildContext context) {
+    final carrito = Provider.of<CarritoProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Productos'),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                // Navigator.pushNamed(context, '/pedido_page');
-                showSearch(context: context, delegate: DataSearch());
-              }),
-          SizedBox(width: 20),
-          IconButton(
-              icon: Icon(Icons.shopping_cart_outlined),
-              onPressed: () => Navigator.pushNamed(context, '/pedido_page')),
-          SizedBox(width: 15),
-        ],
+        centerTitle: true,
+        actions: _getAppBar(carrito, context),
       ),
       body: FutureBuilder(
         future: productoProvider.cargarProductos(),
@@ -74,5 +67,59 @@ class _ProductoPageState extends State<ProductoPage> {
         },
       ),
     );
+  }
+
+  List<Widget> _getAppBar(CarritoProvider carrito, BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () {
+          showSearch(context: context, delegate: DataSearch());
+        }),
+
+      carrito.productosDelCarrito.length == 0
+        ? Container(
+          child: Stack(
+            children: [
+              new IconButton(
+                  icon: Icon(Icons.shopping_cart_outlined),
+                  onPressed: () => Navigator.pushNamed(context, '/pedido_page')),
+              new Positioned(
+                    top: 7.0,
+                    right: 7.0,
+                    child: new Text(
+                      carrito.productosDelCarrito.length.toString(),
+                      style: new TextStyle(
+                          color: kUltimateColorDfruto,
+                          fontSize: 11.0,
+                          fontWeight: FontWeight.w500),
+                    ),),
+            ],
+          ),
+        )
+        : new Container(
+          child: new Stack(
+            children: <Widget>[
+              new IconButton(
+                  icon: Icon(Icons.shopping_cart_outlined),
+                  onPressed: () =>Navigator.pushNamed(context, '/pedido_page')
+                ),
+              new Positioned(
+                top: 7.0,
+                right: 7.0,
+                child: new Center(
+                  child: new Text(
+                    carrito.productosDelCarrito.length.toString(),
+                    style: new TextStyle(
+                        color: kUltimateColorDfruto,
+                        fontSize: 11.0,
+                        fontWeight: FontWeight.w500),
+                  ),
+                )
+              ),
+            ],
+          )),
+    SizedBox(width: 20),
+    ];
   }
 }

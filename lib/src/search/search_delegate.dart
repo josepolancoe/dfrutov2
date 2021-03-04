@@ -49,7 +49,8 @@ class DataSearch extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // crea los resultados que vamos a mostrar
-    return Container();
+    // return Container(child:Text("BUILD RESULTS"));
+    return Container(child:Text(seleccion));
     // return Center(
     //   child: Container(
     //     height: 100,
@@ -84,8 +85,10 @@ class DataSearch extends SearchDelegate {
                 subtitle: Text(producto.precio.toStringAsFixed(2)),
                 onTap: () {
                   close(context, null);
-                  producto.id = '';
-                  Navigator.pushNamed(context, '', arguments: producto);
+                  // seleccion = producto.nombre;
+                  // showResults(context);
+                  // producto.id = '';
+                  Navigator.pushNamed(context, '/producto_detail_page', arguments: producto);
                 },
               );
             }).toList(),
